@@ -1,7 +1,11 @@
-import interfaz as ifz
+from Interfaz import interfaz as ifz
 
-lista(1,2,3,4,5,6,7,8,9)
+lista=['x','x','x','x','x','x','x','x','x']
 
-lista(X,2,3,4,5,6,7,8,9)
+def asignacion_val(lista):
 
-lista(X,2,3,4,5,6,7,O,9)
+    impresion=ifz(lista[0],lista[1],lista[2],lista[3],lista[4],lista[5],lista[6],lista[7],lista[8])
+
+    return impresion
+
+asignacion_val(lista)
