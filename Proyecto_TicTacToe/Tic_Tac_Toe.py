@@ -2,8 +2,8 @@ from Interfaz import interfaz as ifz
 from random import randrange as random
 
 """
-Creamos una funcion la cual ayude a asignar a la interfaz los valores guardados en la lista donde se
-almacenan las selecciones
+Creamos una funcion la cual ayude a asignar a la interfaz los valores guardados 
+en la lista donde se almacenan las selecciones
 """
 
 def asignacion_val(lista):
@@ -48,8 +48,7 @@ def si_win(lista):
         elif lista[i[0]-1]=='O' and lista[i[1]-1]=='O' and lista[i[2]-1]=="O":
             print('Haz sido derrotado por SKYNET :(')
             return True
-        else:
-            return False
+    return False
 
 '''
 Creamos la comprobacion de si el movimiento ingresado es valido.
@@ -117,7 +116,7 @@ while True:
     
     lista[u-1]='O' #Se asigna el valor del usuario a la lista
     asignacion_val(lista)
-    print(si_win(lista))
+    
     if si_win(lista)==True: 
         break #Si gana o pierde, acaba el juego
 
