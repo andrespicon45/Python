@@ -34,39 +34,93 @@ def sel_usuario():
     return x
 
 '''
-Creamos una lista por defecto donde se almacenan las selecciones realizadas
-'''
-
-lista=[1,2,3,4,5,6,7,8,9]
-
-'''
 Creamos las condiciones de victoria, derrota y empate
 '''
-p=[1,2,'O',4,'O',6,'O',8,9]
-def resultado(lista):
+
+def si_win(lista):
 
     win=((1,2,3),(4,5,6),(7,8,9),(1,4,7),(2,5,8),(3,6,9),(1,5,9),(7,5,3))
 
     for i in win:
         if lista[i[0]-1]=='X' and lista[i[1]-1]=='X' and lista[i[2]-1]=="X":
             print('FELICIDADES!!! Haz vencido a la maquina.')
-            break
+            return True
         elif lista[i[0]-1]=='O' and lista[i[1]-1]=='O' and lista[i[2]-1]=="O":
             print('Haz sido derrotado por SKYNET :(')
+            return True
+        else:
+            return False
 
-resultado(p)
+'''
+Creamos la comprobacion de si el movimiento ingresado es valido.
+'''
+
+def mov_val(mov,lista):
+
+    if mov not in lista:
+        return False #Movimiento no valido.
+    else:
+        return True #Movimiento valido
+
+'''
+Creamos la comprobacion de si el juego queda en empate(no hay mas movimientos).
+'''
+def empate(lista):
+    contar=0
+    for i in range(1,10):
+        if i not in lista:
+            continue
+        else:
+            contar+=1
+    if contar==0: 
+        return True #No hay movimientos posibles, ES UN EMPATE!!!
+
+'''
+Creamos una lista por defecto donde se almacenan las selecciones realizadas
+'''
+
+lista=[1,2,3,4,5,6,7,8,9]
 
 '''
 Creamos el algoritmo del juego
 '''
+print('Bienvenido a TicTacToe!!!')
+asignacion_val(lista)
 
-#u=sel_usuario()
+while True:
+    while True:
+        u=sel_usuario() #Usuario elije un movimiento
+        if mov_val(u,lista)==False: #Se comprueba si se puede realizar el movimiento
+            print('Movimiento invalido, ingresa otro movimiento:')
+            continue #Continua el bucle de ingresar un valor por el usuario
+        else:
+            break #Salgo de este minibucle
 
-# for val in lista:
-#     indice=lista.index(val)
-#     if u==val:
-#         lista[indice]="X"
-#         print(lista)
-#     else:
-#         print('Elige otra casilla.')
+    lista[u-1]='X' #Se asigna el valor del usuario a la lista
+    asignacion_val(lista)
 
+    if si_win(lista)==True: 
+        break #Si gana o pierde, acaba el juego
+
+    if empate(lista)==True: 
+        print('No hay movimientos posibles, ES UN EMPATE!!!')
+        break
+    
+    print('Es el turno de la maquina.')
+
+    while True:
+        u=sel_maq() #Maquina elije un movimiento
+        if mov_val(u,lista)==False: #Se comprueba si se puede realizar el movimiento
+            continue #Continua el bucle de ingresar un valor por la maquina
+        else:
+            break #Salgo de este minibucle
+    
+    lista[u-1]='O' #Se asigna el valor del usuario a la lista
+    asignacion_val(lista)
+    print(si_win(lista))
+    if si_win(lista)==True: 
+        break #Si gana o pierde, acaba el juego
+
+    if empate(lista)==True: 
+        print('No hay movimientos posibles, ES UN EMPATE!!!')
+        break
