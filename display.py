@@ -1,60 +1,50 @@
-# pat_num= [
-#     '''###\n# #\n# #\n# #\n###''',
-#     '''# \n#\n#\n#\n#''',
-#     '''###\n# #\n # \n#  \n###''',
-#     '''###\n  #\n###\n #\n###''',
-#     '''# #\n# #\n###\n  #\n  #''',
-#     '''###\n#  \n###\n #\n###''',
-#     '''###\n#  \n###\n# #\n###''',
-#     '''###\n  #\n # \n#\n#''',
-#     '''###\n# #\n###\n# #\n###''',
-#     '''###\n# #\n###\n  #\n###'''
-# ]
 
-# num=input('Ingrese un numero entero no negativo:')
-# for i in num:
-#     i_num=int(i)
-#     print(pat_num[i_num])
-
-digits = [ '1111110',  	# 0
-	   '0110000',	# 1
-	   '1101101',	# 2
-	   '1111001',	# 3
-	   '0110011',	# 4
-	   '1011011',	# 5
-	   '1011111',	# 6
-	   '1110000',	# 7
-	   '1111111',	# 8
-	   '1111011',	# 9
-	   ]
-
-
-def print_number(num):
-	global digits
-	digs = str(num)
-	lines = [ '' for lin in range(5) ]
-	for d in digs:
-		segs = [ [' ',' ',' '] for lin in range(5) ]
-		ptrn = digits[ord(d) - ord('0')]
-		if ptrn[0] == '1':
-			segs[0][0] = segs[0][1] = segs[0][2] = '#'
-		if ptrn[1] == '1':
-			segs[0][2] = segs[1][2] = segs[2][2] = '#'
-		if ptrn[2] == '1':
-			segs[2][2] = segs[3][2] = segs[4][2] = '#'
-		if ptrn[3] == '1':
-			segs[4][0] = segs[4][1] = segs[4][2] = '#'
-		if ptrn[4] == '1':
-			segs[2][0] = segs[3][0] = segs[4][0] = '#'
-		if ptrn[5] == '1':
-			segs[0][0] = segs[1][0] = segs[2][0] = '#'
-		if ptrn[6] == '1':
-			segs[2][0] = segs[2][1] = segs[2][2] = '#'
-		for lin in range(5):
-			lines[lin] += ''.join(segs[lin]) + ' '
-	for lin in lines:
-		print(lin)
+#Creamos una lista con los patrones de los numeros
+graf_num=['1011111',    #0
+          '0000101',    #1
+          '1110110',    #2
+          '1110101',    #3
+          '0101101',    #4
+          '1111001',    #5
+          '1111011',    #6
+          '1000101',    #7
+          '1111111',    #8
+          '1111101',    #9
+         ]
+#Pedimos el ingreso de un numero
+numero=str(input('Ingrese un numero entero no negativo:'))
+#Creamos una lista vacia con el numero de impresiones a realizar
+lista_impresiones=[' ' for x in range(len(numero))]
+#Leemos cada uno de los digitos contenidos en el numero y determinamos cual es
+count=0
+for i in numero:
+    #Creamos una lista vacia que contenga un digito temporalmente
+    num_temp=[[' ' for x in range(3)] for x in range(5)]
+    digito=graf_num[int(i)]
+    #Ahora iteramos en los valores del digito para dibujar el numero
+    if digito[0]=='1':
+        num_temp[0][0]=num_temp[0][1]=num_temp[0][2]='#'
+    if digito[1]=='1':
+        num_temp[2][0]=num_temp[2][1]=num_temp[2][2]='#'
+    if digito[2]=='1':
+        num_temp[4][0]=num_temp[4][1]=num_temp[4][2]='#'
+    if digito[3]=='1':
+        num_temp[0][0]=num_temp[1][0]=num_temp[2][0]='#'
+    if digito[4]=='1':
+        num_temp[0][2]=num_temp[1][2]=num_temp[2][2]='#'
+    if digito[5]=='1':
+        num_temp[2][0]=num_temp[3][0]=num_temp[4][0]='#'
+    if digito[6]=='1':
+        num_temp[2][2]=num_temp[3][2]=num_temp[4][2]='#'
+    #Agregamos el numero a la lista que contiene las impresiones
+    lista_impresiones[count]=num_temp
+    count+=1
+#Imprimimos las lineas de los numeros
+for w in range(5):
+    linea=[]
+    for y in lista_impresiones:
+        sub_linea=''.join(y[w])
+        linea.append(sub_linea)
+    print(' '.join(linea))
 
 
-print_number(int(input("Ingresa el número que deseas mostrar: ")))
-    
