@@ -23,16 +23,22 @@ for col in range(9):
         if columna.count(i)>1:
             print('El sudoku es invalido.')
 #Comprobamos que en cada subcuadro de 3X3 existan los numeros del 1-9 sin repetirse
+invalido=False
 for w in range(3):
     for z in range(3):    
+        if invalido:
+            break
         cuadro=[]
         for x in range(3):
+            if invalido:
+                break
             subfila=sudoku[x+(w*3)]
             for y in range(3):
                 cuadro.append(subfila[y+(z*3)])
         for i in range(1,10):
             if cuadro.count(str(i))>1:
+                invalido=True
                 print('El sudoku es invalido.')
                 break
-else:
+if not invalido:
     print('FELICIDADES! Sudoku completado.')
